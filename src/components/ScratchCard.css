@@ -1,0 +1,313 @@
+/* Scratch Card Modal Overlay */
+.scratch-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+/* Modal Content */
+.scratch-modal-content {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 245, 0.95));
+  border-radius: 24px;
+  padding: 30px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Close Button */
+.scratch-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #ff69b4;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.scratch-close-btn:hover {
+  background: #ff69b4;
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Title */
+.scratch-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #ff1493;
+  font-weight: 700;
+}
+
+/* Scratch Card Container */
+.scratch-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Image Wrapper */
+.scratch-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 4/5;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Couple Image */
+.couple-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.4s ease;
+}
+
+/* Image Loading State */
+.image-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffb6c1, #ffc0cb);
+  gap: 15px;
+}
+
+.image-loading p {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Scratch Canvas Overlay */
+.scratch-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Scratch Hint */
+.scratch-hint {
+  text-align: center;
+  color: #ff69b4;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 10px 0;
+  animation: pulse 2s infinite;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Revealed Message */
+.revealed-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.revealed-text {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #ff1493;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .scratch-modal-content {
+    padding: 20px;
+    max-width: 90%;
+  }
+
+  .scratch-title {
+    font-size: 1.3rem;
+  }
+
+  .scratch-image-wrapper {
+    max-width: 100%;
+  }
+
+  .revealed-text {
+    font-size: 1.1rem;
+  }
+
+  .scratch-hint {
+    font-size: 1.1rem;
+    padding: 0 10px;
+  }
+
+  .scratch-close-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scratch-modal-overlay {
+    padding: 10px;
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+
+  .scratch-modal-content {
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  .scratch-title {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+
+  .scratch-hint {
+    font-size: 1rem;
+  }
+
+  .revealed-text {
+    font-size: 1rem;
+  }
+
+  .scratch-close-btn {
+    width: 40px;
+    height: 40px;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* Make scratch area more obvious on mobile */
+  .scratch-canvas {
+    border: 2px dashed rgba(255, 105, 180, 0.3);
+  }
+}
+
+/* Landscape Mode Optimizations */
+@media (max-height: 600px) and (orientation: landscape) {
+  .scratch-modal-overlay {
+    padding: 10px;
+    align-items: flex-start;
+  }
+
+  .scratch-modal-content {
+    padding: 15px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    margin: auto;
+  }
+
+  .scratch-title {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .scratch-card-container {
+    gap: 10px;
+  }
+
+  .scratch-image-wrapper {
+    max-width: 300px;
+    aspect-ratio: 4/5;
+  }
+
+  .scratch-hint {
+    font-size: 0.9rem;
+    margin: 5px 0;
+  }
+
+  .revealed-text {
+    font-size: 0.95rem;
+  }
+
+  .revealed-message {
+    gap: 10px;
+    margin-top: 5px;
+  }
+
+  .revealed-message .btn-primary {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Landscape Mode for Larger Screens */
+@media (min-width: 768px) and (max-height: 600px) and (orientation: landscape) {
+  .scratch-modal-content {
+    max-width: 600px;
+    padding: 20px;
+  }
+
+  .scratch-image-wrapper {
+    max-width: 350px;
+  }
+}
