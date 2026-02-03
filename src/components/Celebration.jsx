@@ -1,13 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import confetti from 'canvas-confetti';
 import gsap from 'gsap';
 
 function Celebration({ partnerName = 'My Love' }) {
-  const handleReset = () => {
-    if (confirm('Do you want to start over with a new name?')) {
-      localStorage.removeItem('valentinePartnerName');
-      window.location.reload();
+  const [copied, setCopied] = useState(false);
+  
+  const handleShareWithFriend = async () => {
+    const websiteLink = 'https://valentine-topaz-mu.vercel.app/?v=OsKPnVDZZe';
+    
+    try {
+      await navigator.clipboard.writeText(websiteLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 3000);
+    } catch (err) {
+      // Fallback for browsers that don't support clipboard API
+      const textArea = document.createElement('textarea');
+      textArea.value = websiteLink;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        setCopied(true);
+        setTimeout(() => setCopied(false), 3000);
+      } catch (err) {
+        alert('Could not copy link. Please copy manually: ' + websiteLink);
+      }
+      document.body.removeChild(textArea);
     }
   };
   useEffect(() => {
@@ -195,28 +216,36 @@ function Celebration({ partnerName = 'My Love' }) {
         </div>
 
         <button 
-          onClick={handleReset}
+          onClick={handleShareWithFriend}
           style={{
             marginTop: 'var(--spacing-lg)',
-            background: 'rgba(255, 255, 255, 0.5)',
-            color: 'var(--sys-text-secondary)',
-            border: '1px solid rgba(0, 0, 0, 0.1)',
-            padding: '0.5rem 1rem',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: '0.85rem',
+            background: copied 
+              ? 'linear-gradient(135deg, rgba(76, 175, 80, 0.3), rgba(46, 125, 50, 0.3))'
+              : 'linear-gradient(135deg, rgba(245, 175, 175, 0.5), rgba(232, 153, 153, 0.5))',
+            color: 'var(--sys-text-primary)',
+            border: '2px solid ' + (copied ? 'rgba(76, 175, 80, 0.6)' : 'rgba(245, 175, 175, 0.6)'),
+            padding: '0.75rem 1.5rem',
+            borderRadius: 'var(--radius-md)',
+            fontSize: '1rem',
+            fontWeight: '600',
             cursor: 'pointer',
-            transition: 'all 0.3s ease'
+            transition: 'all 0.3s ease',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)'
           }}
           onMouseEnter={(e) => {
-            e.target.style.background = 'rgba(245, 175, 175, 0.3)';
-            e.target.style.transform = 'scale(1.05)';
+            if (!copied) {
+              e.target.style.background = 'linear-gradient(135deg, rgba(245, 175, 175, 0.7), rgba(232, 153, 153, 0.7))';
+              e.target.style.transform = 'scale(1.05)';
+            }
           }}
           onMouseLeave={(e) => {
-            e.target.style.background = 'rgba(255, 255, 255, 0.5)';
-            e.target.style.transform = 'scale(1)';
+            if (!copied) {
+              e.target.style.background = 'linear-gradient(135deg, rgba(245, 175, 175, 0.5), rgba(232, 153, 153, 0.5))';
+              e.target.style.transform = 'scale(1)';
+            }
           }}
         >
-          🔄 Start Over
+          {copied ? '✓ Link Copied!' : '💌 Share with a Friend'}
         </button>
       </div>
 
