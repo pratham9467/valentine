@@ -1,4 +1,4 @@
-# 💝 LUX Radiant Valentine - Premium React Valentine's Day Website
+# 💝Valentine - Premium React Valentine's Day Website
 
 A sophisticated, interactive Valentine's Day proposal website built with React, GSAP, and modern glassmorphism design. Created with love for Yeshu.
 
