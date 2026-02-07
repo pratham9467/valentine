@@ -176,7 +176,7 @@ Interactive slider with dynamic messages based on percentage:
 - 0-100%: "Perfect amount of love 💕"
 - 100-1000%: "Perfect amount of love 💕"
 - 1000-2000%: "Bas ab aur nahi… dil full ho gaya ❤️✨"
-- 2000-5000%: "Yeshu tu bohot zyada cute hai 😭💘"
+- 2000-5000%: "Yar tu bohot zyada cute hai 😭💘"
 - 5000+%: "Itna pyaar?! 😍💝 Meri jaan le legi kya 🥰"
 
 ### Celebration Confetti
